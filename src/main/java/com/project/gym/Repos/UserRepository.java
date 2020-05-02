@@ -1,5 +1,6 @@
 package com.project.gym.Repos;
 
+import com.project.gym.Model.Plan;
 import com.project.gym.Model.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, String >{
     List<User> findByNameLike(String name);
     User findUserByEmail(String email);
     User findByEmail(String email);

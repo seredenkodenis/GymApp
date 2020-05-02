@@ -7,15 +7,20 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
+
     @NotEmpty
     private String date;
+
     @NotEmpty
     private String startTime;
+
     @NotEmpty
     private String stopTime;
+
     @NotEmpty
     @Column(length=1000)
     private String description;
+
     @ManyToOne
     @JoinColumn(name="USER_EMAIL")
     private User user;

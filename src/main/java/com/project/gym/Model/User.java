@@ -8,18 +8,24 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@Entity(name = "users_")
+@Entity(name = "users")
 public class User {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Id
     @Email
     @NotEmpty
     @Column(unique = true)
     private String email;
+
     @NotEmpty
     private String name;
+
     @Size(min = 4)
     private String password;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
@@ -28,6 +34,10 @@ public class User {
             @JoinColumn(name = "USER_EMAIL", referencedColumnName = "email") }, inverseJoinColumns = {
             @JoinColumn(name = "ROLE_NAME", referencedColumnName = "name") })
     private List<Role> roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "plan_id", referencedColumnName = "id")
+    private Plan plan;
 
     public String getEmail() {
         return email;
@@ -77,5 +87,13 @@ public class User {
 
     public User() {
 
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

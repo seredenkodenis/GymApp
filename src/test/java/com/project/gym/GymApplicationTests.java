@@ -1,8 +1,10 @@
 package com.project.gym;
 
+import com.project.gym.Model.Plan;
 import com.project.gym.Model.Task;
 import com.project.gym.Model.User;
 import com.project.gym.Repos.UserRepository;
+import com.project.gym.Services.PlanService;
 import com.project.gym.Services.TaskService;
 import com.project.gym.Services.UserService;
 import org.aspectj.lang.annotation.Before;
@@ -24,6 +26,8 @@ class GymApplicationTests {
     private UserService userService;
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private PlanService planService;
     @Autowired
     private UserRepository userRepository;
 
@@ -72,11 +76,20 @@ class GymApplicationTests {
         List<Task> task = taskService.findUserTask(user);
         System.out.println("user1 data ------------------------");
         System.out.println(task.size());
-
-
     }
 
+    @Test
+    public void addTestPlan(){
+        Plan plan = new Plan("monday", "tuesday", "wednesday","thursday","friday","saturday","sunday");
+        User user = userService.findOne("admin@mail.com");
+        planService.addPlan(user,plan);
+    }
 
-
+    @Test
+    public void getTestPlan(){
+        User user = userService.findOne("admin@mail.com");
+        Plan plan = user.getPlan();
+        System.out.println(plan.getMon());
+    }
 
 }
