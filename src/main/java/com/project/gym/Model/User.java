@@ -2,6 +2,8 @@ package com.project.gym.Model;
 
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -26,6 +28,16 @@ public class User {
     @Size(min = 4)
     private String password;
 
+    private String phone;
+
+    private String aboniment;
+
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    @Column(name="picture")
+    private byte[] picture;
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
@@ -38,6 +50,9 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "plan_id", referencedColumnName = "id")
     private Plan plan;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
+    private List<Weight> weights;
 
     public String getEmail() {
         return email;
@@ -85,6 +100,23 @@ public class User {
         this.password = password;
     }
 
+    public User(Long id, @Email @NotEmpty String email, @NotEmpty String name, @Size(min = 4) String password, String phone, String aboniment) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.aboniment = aboniment;
+    }
+
+
+    public User(@Email @NotEmpty String email, @NotEmpty String name, @Size(min = 4) String password, String phone) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+    }
+
     public User() {
 
     }
@@ -95,5 +127,45 @@ public class User {
 
     public void setPlan(Plan plan) {
         this.plan = plan;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAboniment() {
+        return aboniment;
+    }
+
+    public void setAboniment(String aboniment) {
+        this.aboniment = aboniment;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public List<Weight> getWeights() {
+        return weights;
+    }
+
+    public void setWeights(List<Weight> weights) {
+        this.weights = weights;
     }
 }

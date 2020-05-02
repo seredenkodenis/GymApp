@@ -3,15 +3,18 @@ package com.project.gym;
 import com.project.gym.Model.Plan;
 import com.project.gym.Model.Task;
 import com.project.gym.Model.User;
+import com.project.gym.Model.Weight;
 import com.project.gym.Repos.UserRepository;
 import com.project.gym.Services.PlanService;
 import com.project.gym.Services.TaskService;
 import com.project.gym.Services.UserService;
+import com.project.gym.Services.WeightService;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
@@ -28,6 +31,8 @@ class GymApplicationTests {
     private TaskService taskService;
     @Autowired
     private PlanService planService;
+    @Autowired
+    private WeightService weightService;
     @Autowired
     private UserRepository userRepository;
 
@@ -90,6 +95,25 @@ class GymApplicationTests {
         User user = userService.findOne("admin@mail.com");
         Plan plan = user.getPlan();
         System.out.println(plan.getMon());
+    }
+
+    @Test
+    public void addWeight(){
+        User user = userService.findOne("user1@mail.com");
+        Date date = new Date();
+        Weight weight = new Weight(date,82.3f,"just a test");
+        weightService.addWeight(user,weight);
+    }
+
+    @Test
+    public void getWeight(){
+        User user = userService.findOne("user1@mail.com");
+        List<Weight> weights = weightService.userWeights(user);
+        if(weights.size() == 0){
+            System.out.println("SORRE BRO ONLY 0");
+        }else{
+            System.out.println(weights.get(0).getWeight());
+        }
     }
 
 }
