@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class WeightService {
+public class WeightService{
     @Autowired
     private WeightRepository weightRepository;
 
