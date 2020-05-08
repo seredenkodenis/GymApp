@@ -1,0 +1,152 @@
+@media (max-width: 992px) {
+  .mobileMenu {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    -webkit-transition: all ease 0.25s;
+    transition: all ease 0.25s;
+  }
+  .mobileMenu.onRight {
+    left: auto;
+    right: 0;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  .mobileMenu.open {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  .mobileMenu .navbar-nav {
+    overflow-y: auto;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+  .overlay.open {
+    display: block;
+    z-index: 1029;
+  }
+  .navbar-toggler{
+    margin-top: 5px;
+    width: 60px;
+  }
+  
+}
+
+.navbar{
+  background-color: #121212 !important;
+}
+.navbar-collapse{
+  background-color: #121212 !important;
+}
+.navbar-brand{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 49px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+float: left !important;
+color: #FEFAFF;
+}
+
+.header-text{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 20px;
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+margin-right: 26px;
+}
+
+.header-btn-text{
+  font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 20px;
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+margin-top: 0px;
+margin-left: 4px;
+}
+
+.thumbnail {
+    position: relative;
+}
+
+.caption {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+}
+
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+body{
+  background-color: #F1F1F1;
+}
+
+
+.user-text{
+  font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 19px;
+line-height: 18px;
+/* or 112% */
+
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+
+      .footer{
+        height: 150px;
+      }
+      .footer-text{
+        font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 29px;
+/* or 121% */
+
+
+align-items: center;
+text-align: center;
+
+color: #FEFAFF;
+
+      }

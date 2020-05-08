@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>GYM</title>
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+         integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y="
+         crossorigin="anonymous"
+         />
+      <link rel="stylesheet" th:href="@{css/style.css}"/>
+   </head>
+   <body>
+   <div th:replace="fragments/header"></div>
+
+     <div class="card bg-dark text-white" style="margin-top: 73px;">
+  <img src="../images/slider2.jpg" class="card-img" alt="...">
+  <div class="card-img-overlay">
+	<div class="container">
+		   	<div class="row">
+		   		<div class="col-sm">
+		   			<p class="slider-text">Тренажерный<br> зал нового<br> поколения!</p>
+		   			<button class="slider-btn">
+                     		<span class="slider-btn-text">Регистрация</span>
+                     	</button>
+		   		</div>
+		   	</div>
+		   </div>	   
+  </div>
+</div>
+    <div class="container-fluid" style="margin-top: 16px;">
+    	<div class="row justify-content-center">
+    		<div class="col-sm" style="text-align: center;">
+    			<h1 class="who-title">Кто мы?</h1>
+    			<span class="line"></span>
+    		</div>
+    	</div>
+    </div>
+    <div class="container" style="margin-top: 40px; margin-bottom: 70px;">
+    	<div class="row justify-content-center">
+    		<div class="col-sm-6">
+    			<img src="../images/who-img.jpg" style="width: 100%;" alt="">
+    		</div>
+    		<div class="col-sm-6">
+    			<p class="who-text">Мы инновационый тренажерный зал,<br> который впервые предлагает купить<br> абонимент онлайн,<br> доступ к дневнику и конечно качественные тренажеры!  <br><br>Хотите узнать больше и попробовать нашу систему в течении 5 дней БЕСПЛАТНО?</p>
+    			<button class="who-btn">
+                     	<span class="who-btn-text">Регистрация</span>
+                </button>
+    		</div>
+    	</div>
+    </div>
+     <div class="container-fluid serv">
+        <!--<img src="images/boxer-1430490_1920 1.png" alt="Snow" style="width: 100%;" class="box-img">-->
+        <div class="centered">Наши услуги</div>
+      </div>
+<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+	<div class="row justify-content-center">
+		<div class="col-sm" style="text-align: center;">
+			<img src="../images/image%201.png" style="margin-bottom: 10px;" alt="">
+			<h3 class="serv-tit">ВЫНОСЛИВОСТЬ</h3>
+			<p style="text-align: left !important; font-family: 'Open Sans', sans-serif; font-size: 17px;">Without a doubt, consistent training is the most important aspect of fitness success and forward progress. At Fast Lean Fit™, our trainers are the experts in holding you accountable. We will push and challenge you every time you show up.</p>
+		</div>
+		<div class="col-sm" style="text-align: center;">
+			<img src="../images/image%202.png" style="margin-bottom: 10px;" alt="">
+			<h3 class="serv-tit">ЛИЧНЫЙ ТРЕНЕР</h3>
+			<p style="text-align: left !important; font-family: 'Open Sans', sans-serif; font-size: 17px;">Without a doubt, consistent training is the most important aspect of fitness success and forward progress. At Fast Lean Fit™, our trainers are the experts in holding you accountable. We will push and challenge you every time you show up.</p>
+		</div>
+		<div class="col-sm" style="text-align: center;">
+			<img src="../images/image%203.png" style="margin-bottom: 10px;" alt="">
+			<h3 class="serv-tit">ВОСТАНОВЛЕНИЕ</h3>
+			<p style="text-align: left !important; font-family: 'Open Sans', sans-serif; font-size: 17px;">Without a doubt, consistent training is the most important aspect of fitness success and forward progress. At Fast Lean Fit™, our trainers are the experts in holding you accountable. We will push and challenge you every time you show up.</p>
+		</div>
+	</div>
+</div>
+<div class="former">
+			 <form action="/" class="decor" style="margin-top: 30px; margin-bottom: 30px;">
+      <div class="form-left-decoration"></div>
+      <div class="form-right-decoration"></div>
+      <div class="circle"></div>
+      <div class="form-inner" style="text-align: center;">
+        <h1>Contact us</h1>
+        <input type="text" placeholder="Имя">
+        <input type="email" placeholder="Email">
+        <input type="telephone" placeholder="Телефон">
+        <textarea placeholder="Сообщение..." rows="5"></textarea>
+        <button type="submit" href="/">Отправить</button>
+      </div>
+    </form>
+    </div>
+
+      <div th:replace="fragments/footer"></div>
+
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+         crossorigin="anonymous"
+         ></script>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+         integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
+         crossorigin="anonymous"
+         ></script>
+      <script th:src="@{js/script.js}"></script>
+   </body>
+</html>

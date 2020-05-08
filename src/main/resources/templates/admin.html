@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>GYM</title>
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+         integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y="
+         crossorigin="anonymous"
+         />
+      <link rel="stylesheet" th:href="@{css/admin.css}"/>
+   </head>
+   <body>
+
+   <div th:replace="fragments/header"></div>
+     
+
+<div class="container" style="margin-top: 103px; margin-bottom: 70px; width: 90%;background-color: #C4C4C4;">
+   <div class="row">
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-добавить-пользователя-100 1.png" style="width: 66px; margin-bottom: 10px;" alt=""><br>
+         <span class="user-text">Добавить пользователя</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-удалить-пользователя-50 1.png" style="width: 66px;margin-bottom: 10px;" alt=""><br>
+         <span class="user-text">Удалить пользователя</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-найти-пользователя-мужчину-100 1.png" style="width: 73px; margin-bottom: 4px;" alt=""><br>
+         <span class="user-text">Поиск  пользователя</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-изменить-пользователя-80 1.png" style="width: 62px; margin-top: 10px; margin-bottom: 5px;" alt=""><br>
+         <span class="user-text">Обновить  пользователя</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-отправить-сообщение-100 1.png" style="width: 76px;" alt=""><br>
+         <p class="user-text">Уведомить  пользователя</p>
+      </div>
+   </div>
+   <div class="row" style="margin-top: 40px; padding-bottom:40px;">
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-добавить-свойство-128 1.png" style="width: 66px; margin-bottom: 15px;" alt=""><br>
+         <span class="user-text">Добавить публикацию</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-удалить-свойство-64 1.png" style="width: 66px;margin-bottom: 15px;" alt=""><br>
+         <span class="user-text">Удалить публикацию</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-папка-для-просмотра-96 1.png" style="width: 73px;margin-bottom: 10px;" alt=""><br>
+         <span class="user-text">Найти  публикацию</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-редактировать-свойство-64 1.png" style="width: 62px; margin-top: 10px; margin-bottom: 10px;" alt=""><br>
+         <span class="user-text">Изменить  публикацию</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         
+      </div>
+   </div>
+</div>
+
+<div class="container" style="margin-top: 90px; margin-bottom: 70px; width: 90%;background-color: #C4C4C4;">
+   <div class="row" style="padding-top: 20px; padding-bottom:40px;">
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-добавить-свойство-128 1.png" style="width: 66px; margin-bottom: 15px;" alt=""><br>
+         <span class="user-text">Добавить абонимент пользователю</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-удалить-свойство-64 1.png" style="width: 66px;margin-bottom: 15px;" alt=""><br>
+         <span class="user-text">Удалить абонимент пользователю</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-редактировать-свойство-64 1.png" style="width: 73px;margin-bottom: 10px;" alt=""><br>
+         <span class="user-text">Изменить абонимент пользователю</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         <img src="images/icons8-папка-для-просмотра-96 1.png" style="width: 62px; margin-top: 10px; margin-bottom: 10px;" alt=""><br>
+         <span class="user-text">Поиск абонимента пользователя</span>
+      </div>
+      <div class="col-sm" style="text-align: center;">
+         
+      </div>
+   </div>
+</div>
+
+
+   <div th:replace="fragments/footer"></div>
+
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+         crossorigin="anonymous"
+         ></script>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+         integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
+         crossorigin="anonymous"
+         ></script>
+   <script th:src="@{js/script.js}"></script>
+   </body>
+</html>
