@@ -19,31 +19,17 @@
      
 
 <div class="container newser" >
-  <div class="row" style="background-color: white; margin-bottom: 50px;">
+  <div class="row" style="background-color: white; margin-bottom: 50px;" th:each="article: ${articles}">
     <div class="col-sm">
       <img src="images/who-img.jpg" style="width: 100%; margin-top: 10px; margin-bottom: 10px;" alt="">
     </div>
     <div class="col-sm" style="margin-top: 10px;">
-      <h4 class="news-title">Изменения в работе зала!</h4>
-      <p class="news-short">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-      <p class="news-date">Дата: 23.03.2019</p>
-      <button class="news-read"><span class="news-read-text">Читать полностью</span></button>
+      <h4 class="news-title" th:text="${article.title}"></h4>
+      <p class="news-short" th:text="${article.shortText}"></p>
+        <p class="news-date">Дата: <span th:text="${article.date}"></span></p>
+        <a th:href="@{'/news/' + ${article.id}}"><button class="news-read"><span class="news-read-text">Читать полностью</span></button></a>
     </div>
   </div>
-   
-   <div class="row" style="background-color: white; margin-bottom: 50px;">
-    <div class="col-sm">
-      <img src="images/who-img.jpg" style="width: 100%; margin-top: 10px; margin-bottom: 10px;" alt="">
-    </div>
-    <div class="col-sm" style="margin-top: 10px;">
-      <h4 class="news-title">Изменения в работе зала!</h4>
-      <p class="news-short">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-      <p class="news-date">Дата: 23.03.2019</p>
-      <button class="news-read"><span class="news-read-text">Читать полностью</span></button>
-    </div>
-  </div>
-
-  
 
 </div>
 

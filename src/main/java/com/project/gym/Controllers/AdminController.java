@@ -1,12 +1,20 @@
 package com.project.gym.Controllers;
 
+import com.project.gym.Model.Article;
+import com.project.gym.Repos.ArticleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private ArticleRepository articleRepository;
 
     @GetMapping("/main")
     public String mainGet(){
@@ -51,5 +59,16 @@ public class AdminController {
     @GetMapping("/searchUser")
     public String searchUserGet(){
         return "searchUser";
+    }
+    @GetMapping("/addNews")
+    public String addNewsGet(){
+        return "addNews";
+    }
+
+    @PostMapping("/addNews")
+    public String addNewsPost(@RequestParam String title, @RequestParam String text, @RequestParam String shortText){
+        Article article = new Article(title, text, shortText);
+        articleRepository.save(article);
+        return "news";
     }
 }
