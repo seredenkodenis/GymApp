@@ -24,10 +24,13 @@
         <div class="card card-container">
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <div class="alert alert-danger" role="alert" th:if="${exists}">
+                Такой пользователь уже существует!
+            </div>
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin" th:object="${user}" th:action="@{/register}" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="name" name="name" id="name" class="form-control" placeholder="Имя" required autofocus>
+                <input type="name" name="name" id="name" class="form-control" placeholder="Имя" pattern="[a-zA-Zа-яА-Я]+" required autofocus>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>
                 <input type="phone" name="phone" id="phone" class="form-control" placeholder="Телефон" required autofocus>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Пароль" required>
@@ -35,7 +38,7 @@
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Зарегистрироваться</button>
             </form><!-- /form -->
            
-            <a href="../users/login.html" class="forgot-password">
+            <a th:href="@{login}" class="forgot-password">
                 Войти
             </a>
         </div><!-- /card-container -->
@@ -51,6 +54,6 @@
          integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
          crossorigin="anonymous"
          ></script>
-      <script src="./js/script.js"></script>
+      <script th:src="@{js/script.js}"></script>
    </body>
 </html>
