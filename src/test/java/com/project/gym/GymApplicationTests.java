@@ -76,6 +76,13 @@ class GymApplicationTests {
     }
 
     @Test
+    public void temp(){
+        User newUser = new User("user10@mail.com", "user4", "123456");
+        newUser.setId((long) 1);
+        userService.createUser(newUser);
+    }
+
+    @Test
     public void testTask() {
         User user = userRepository.findUserByEmail("user1@mail.com");
         List<Task> task = taskService.findUserTask(user);

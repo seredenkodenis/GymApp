@@ -41,5 +41,11 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public User findOneId(Long id){
+        return userRepository.findUserById(id);
+    }
 
+    public User findOnePhone(String phone){return userRepository.findUserByPhone(phone);}
+
+    public User findOneSurname(String surname){ return userRepository.findUserBySurname(surname);}
 }

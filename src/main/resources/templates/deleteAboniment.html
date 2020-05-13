@@ -20,44 +20,6 @@
 <div class="container-fluid" style="margin-top: 93px;">
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1" style="margin-left: 30px;margin-bottom: 30px;">
-Найти пользователя
-</button>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Найти</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <form>
-               <div class="form-group">
-                  <label for="inputAddress">Номер</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="998234">
-               </div>
-               <div class="form-group">
-                  <label for="surname">Фамилия</label>
-                  <input type="text" class="form-control" id="surname" placeholder="Пупкин">
-               </div>
-               <div class="form-group">
-                  <label for="phone">Телефон</label>
-                  <input type="text" class="form-control" id="phone" placeholder="0508823512">
-               </div>
-               <button type="submit" class="btn btn-primary">Найти</button>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-         </div>
-      </div>
-   </div>
-</div>
-
-<!-- Button trigger modal -->
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-left: 30px;margin-bottom: 30px;">
 Удалить абонимент
 </button>
@@ -66,30 +28,31 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Удалить</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Удалить абонимент</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
          </div>
          <div class="modal-body">
-            <form>
+            <form th:action="@{/admin/deleteAboniment/delete}" method="post">
+                <p>Вы можете заполнить только одно поле. Фамилия и телефон должны повторяться один раз!</p>
                <div class="form-group">
-                  <label for="inputAddress">Карточка</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="998234">
+                  <label for="inputAddress">Номер</label>
+                  <input type="text" class="form-control" id="inputAddress" name="id" placeholder="998234" pattern="[0-9]+">
                </div>
                <div class="form-group">
                   <label for="surname">Фамилия</label>
-                  <input type="text" class="form-control" id="surname" placeholder="Пупкин">
+                  <input type="text" class="form-control" id="surname" name="surname" placeholder="Пупкин" pattern="[a-zA-Zа-яА-Я]+">
                </div>
                <div class="form-group">
                   <label for="phone">Телефон</label>
-                  <input type="text" class="form-control" id="phone" placeholder="0508823512">
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="0508823512" pattern="[0-9]+">
                </div>
-               <button type="submit" class="btn btn-primary">Удалить</button>
+               <button type="submit" class="btn btn-danger">Удалить</button>
             </form>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
          </div>
       </div>
    </div>

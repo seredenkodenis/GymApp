@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 
 @Entity(name = "users")
@@ -25,12 +26,20 @@ public class User {
     @NotEmpty
     private String name;
 
+    private String surname;
+
     @Size(min = 4)
     private String password;
 
     private String phone;
 
+    private String address;
+
     private String aboniment;
+
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
 
     @Lob
     @Type(type = "org.hibernate.type.BinaryType")
@@ -94,6 +103,22 @@ public class User {
         this.roles = roles;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public User(String email, String name, String password) {
         this.email = email;
         this.name = name;
@@ -143,6 +168,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAboniment() {

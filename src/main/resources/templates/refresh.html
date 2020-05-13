@@ -28,30 +28,37 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Удалить</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Изменить</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
          </div>
          <div class="modal-body">
-            <form>
+            <form method="post" th:action="@{/admin/refresh/edit}">
                <div class="form-group">
-                  <label for="inputAddress">Номер</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="998234">
+                  <label for="inputAddress">Номер пользователя</label>
+                  <input type="text" class="form-control" name="id" id="inputAddress" placeholder="998234" required>
                </div>
                <div class="form-group">
                   <label for="phone">Телефон</label>
-                  <input type="text" class="form-control" id="phone" placeholder="0508823512">
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="0508823512">
                </div>
+                <div class="form-group">
+                    <label for="surname">Имя</label>
+                    <input type="text" class="form-control" name="name" id="surname" placeholder="Вася" pattern="[а-яА-Яa-zA-Z]+">
+                </div>
                <div class="form-group">
                   <label for="surname">Фамилия</label>
-                  <input type="text" class="form-control" id="surname" placeholder="Пупкин">
+                  <input type="text" class="form-control" name="surname" id="surname" placeholder="Пупкин" pattern="[а-яА-Яa-zA-Z]+">
                </div>
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                   <option selected>Абонимент</option>
-                   <option value="1">Месяц</option>
-                  <option value="2">Месяц+тренер</option>
-                  <option value="3">Год</option>
+                <div class="form-group">
+                    <label for="surname">Изменить номер</label>
+                    <input type="text" class="form-control" name="newNumber" id="surname" placeholder="Введите новый номер" pattern="[0-9]+">
+                </div>
+                <select class="custom-select my-1 mr-sm-2" name="aboniment" id="inlineFormCustomSelectPref" th:placeholder="Абонимент">
+                   <option value="month">Месяц</option>
+                  <option value="monthAndTrainer">Месяц+тренер</option>
+                  <option value="year">Год</option>
                 </select>
                <button type="submit" class="btn btn-primary">Изменить</button>
             </form>
