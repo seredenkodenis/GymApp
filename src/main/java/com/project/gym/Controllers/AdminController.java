@@ -4,9 +4,11 @@ import com.project.gym.Model.Article;
 import com.project.gym.Model.User;
 import com.project.gym.Repos.ArticleRepository;
 import com.project.gym.Repos.UserRepository;
+import com.project.gym.Services.NotificationService;
 import com.project.gym.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,6 +29,9 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     private UserService userService;
@@ -92,38 +99,67 @@ public class AdminController {
     public String deleteNewsGet(){
         return "deleteNews";
     }
+
+
     @GetMapping("/deleteUser")
-    public String deleteUserGet(){
+    public String deleteUserGet(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
         return "deleteUser";
     }
+
+    @PostMapping("/deleteUser")
+    public String deleteUserPos(@RequestParam String surname, @RequestParam String email, @RequestParam String phone, @RequestParam Long id){
+        User user = null;
+        if(id != null) {
+            userRepository.deleteUserById(id);
+        }
+        if(email != null ){
+            userRepository.deleteUserByEmail(email);
+        }
+        if(phone != null) {
+            userRepository.deleteUserByPhone(phone);
+        }
+        return "redirect:/admin/main";
+    }
+
     @GetMapping("/findNews")
     public String findNewsGet(){
         return "findNews";
     }
     @GetMapping("/notifyUser")
-    public String notifyUserGet(){
+    public String notifyUserGet(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
         return "notifyUser";
+    }
+
+    @PostMapping("/notifyUser")
+    public String notifyUserPost(@RequestParam Long id, @RequestParam String text, @RequestParam String msgType){
+        notificationService.birtdayNotification(id, text, msgType);
+        return "redirect:/admin/main";
     }
 
 
     @GetMapping("/refresh")
-    public String refreshGet(){
+    public String refreshGet(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
         return "refresh";
     }
 
     @PostMapping("/refresh/edit")
     public String refreshPost(@RequestParam Long id, @RequestParam String surname, @RequestParam String name, @RequestParam String phone, @RequestParam String aboniment, @RequestParam Long newNumber){
-        User user;
-        user = userService.findOneId(id);
+        User user = userRepository.findUserById(id);
         if(user == null)
             return "errorEdit";
-        if(name!= null)
+        if(name.length()!= 0)
             user.setName(name);
-        if(surname!= null)
+        if(surname.length()!= 0)
             user.setSurname(surname);
-        if(phone!= null)
+        if(phone.length()!= 0)
             user.setPhone(phone);
-        if(aboniment != null)
+        if(aboniment.length() != 0)
             user.setAboniment(aboniment);
         if(newNumber != null)
             user.setId(newNumber);
@@ -133,7 +169,28 @@ public class AdminController {
 
 
     @GetMapping("/searchUser")
-    public String searchUserGet(){
+    public String searchUserGet(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
+        return "searchUser";
+    }
+
+    @PostMapping("/searchUser")
+    public String searchUserPost(@RequestParam String surname, @RequestParam String email, @RequestParam String phone, @RequestParam Long id, Model model){
+        List<User> users = null;
+        if(surname!=null){
+            users = userRepository.findUsersBySurname(surname);
+        }
+        if(email!= null){
+            users = Collections.singletonList(userRepository.findUserByEmail(email));
+        }
+        if(phone!=null){
+            users = Collections.singletonList(userRepository.findUserByPhone(phone));
+        }
+        if(id != null){
+            users = Collections.singletonList(userRepository.findUserById(id));
+        }
+        model.addAttribute("users",users);
         return "searchUser";
     }
 

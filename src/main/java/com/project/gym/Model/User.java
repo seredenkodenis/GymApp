@@ -23,7 +23,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotEmpty
+
     private String name;
 
     private String surname;
@@ -47,7 +47,7 @@ public class User {
     private byte[] picture;
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Task> tasks;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -56,11 +56,11 @@ public class User {
             @JoinColumn(name = "ROLE_NAME", referencedColumnName = "name") })
     private List<Role> roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "plan_id", referencedColumnName = "id")
     private Plan plan;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Weight> weights;
 
     public String getEmail() {

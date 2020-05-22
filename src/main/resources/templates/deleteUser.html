@@ -34,18 +34,23 @@
             </button>
          </div>
          <div class="modal-body">
-            <form>
+             <p>Вы можете заполнить одно из полей!</p>
+            <form th:method="post" th:action="@{/admin/deleteUser}">
                <div class="form-group">
-                  <label for="inputAddress">Номер</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="998234">
+                  <label for="inputAddress">Номер(id)</label>
+                  <input type="text" class="form-control" name="id" id="inputAddress" pattern="[0-9]+" placeholder="998234">
                </div>
                <div class="form-group">
                   <label for="surname">Фамилия</label>
-                  <input type="text" class="form-control" id="surname" placeholder="Пупкин">
+                  <input type="text" class="form-control" pattern="[а-яА-Яa-zA-Z]+" name="surname" id="surname" placeholder="Пупкин">
                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="text" class="form-control" name="email" id="email" pattern="[a-zA-z0-9]+@[a-zA-Z]+[.][a-zA-z]+" placeholder="ader@mail.com">
+                </div>
                <div class="form-group">
                   <label for="phone">Телефон</label>
-                  <input type="text" class="form-control" id="phone" placeholder="0508823512">
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="0508823512">
                </div>
                <button type="submit" class="btn btn-primary">Удалить</button>
             </form>
@@ -61,72 +66,67 @@
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1" style="margin-left: 30px;margin-bottom: 30px;">
 Найти пользователя
 </button>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Найти</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <form>
-               <div class="form-group">
-                  <label for="inputAddress">Номер</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="998234">
-               </div>
-               <div class="form-group">
-                  <label for="surname">Фамилия</label>
-                  <input type="text" class="form-control" id="surname" placeholder="Пупкин">
-               </div>
-               <div class="form-group">
-                  <label for="phone">Телефон</label>
-                  <input type="text" class="form-control" id="phone" placeholder="0508823512">
-               </div>
-               <button type="submit" class="btn btn-primary">Найти</button>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-         </div>
-      </div>
-   </div>
-</div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Найти</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:method="post" th:action="@{/admin/searchUser}">
+                        <div class="form-group">
+                            <label for="inputAddress">Номер(id)</label>
+                            <input type="text" class="form-control" name="id" id="inputAddress" placeholder="998234" pattern="[0-9]+">
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Фамилия</label>
+                            <input type="text" class="form-control" name="surname" id="surname" placeholder="Пупкин" pattern="[a-zA-Zа-яА-Я]+">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="0508823512">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">E-mail</label>
+                            <input type="text" class="form-control" name="email" id="phone" placeholder="mail@gmail.com" pattern="[a-zA-z0-9]+@[a-zA-Z]+[.][a-zA-z]+">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Найти</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-<table class="table table-striped table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Имя и Фамилия</th>
-      <th scope="col">Номер телефона</th>
-      <th scope="col">Абонимент</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Вася Пупкин</td>
-      <td>0506374757</td>
-      <td>Закончен</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Дмитрий Криков</td>
-      <td>0506324357</td>
-      <td>Месяц</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>юрий Антонович</td>
-      <td>0978721369</td>
-      <td>Год</td>
-    </tr>
-  </tbody>
-</table>
+    <table class="table table-striped table-bordered table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Номер телефона</th>
+            <th scope="col">Адресс</th>
+            <th scope="col">Абонимент</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <th scope="row" th:text="${user.id}"></th>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.aboniment}"></td>
+        </tr>
+        </tbody>
+    </table>
    
 </div>
 
