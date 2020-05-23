@@ -77,7 +77,9 @@ public class AdminController {
     }
 
     @GetMapping("/deleteAboniment")
-    public String deleteAbonimentGet(){
+    public String deleteAbonimentGet(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
         return "deleteAboniment";
     }
 
@@ -96,8 +98,15 @@ public class AdminController {
     }
 
     @GetMapping("/deleteNews")
-    public String deleteNewsGet(){
+    public String deleteNewsGet(Model model){
+        List<Article> articles = articleRepository.findAll();
+        model.addAttribute("articles",articles);
         return "deleteNews";
+    }
+    @PostMapping("/deleteNews")
+    public String deleteNewsPost(@RequestParam Long id){
+        articleRepository.deleteById(id);
+        return "redirect:/admin/main";
     }
 
 
@@ -124,9 +133,19 @@ public class AdminController {
     }
 
     @GetMapping("/findNews")
-    public String findNewsGet(){
+    public String findNewsGet(Model model){
+        List<Article> articles = articleRepository.findAll();
+        model.addAttribute("articles", articles);
         return "findNews";
     }
+
+    @PostMapping("/findNews")
+    public String findNewsPost(@RequestParam Long id, Model model){
+        Article article = articleRepository.findArticleById(id);
+        model.addAttribute("articles",article);
+        return "findNews";
+    }
+
     @GetMapping("/notifyUser")
     public String notifyUserGet(Model model){
         List<User> users = userRepository.findAll();
@@ -175,23 +194,48 @@ public class AdminController {
         return "searchUser";
     }
 
+    @GetMapping("/searchAbo")
+    public String searcAbo(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
+        return "searchAbo";
+    }
+
     @PostMapping("/searchUser")
     public String searchUserPost(@RequestParam String surname, @RequestParam String email, @RequestParam String phone, @RequestParam Long id, Model model){
         List<User> users = null;
-        if(surname!=null){
+        if(surname.length() !=0){
             users = userRepository.findUsersBySurname(surname);
         }
-        if(email!= null){
+        if(email.length()!=0){
             users = Collections.singletonList(userRepository.findUserByEmail(email));
         }
-        if(phone!=null){
+        if(phone.length()!=0){
             users = Collections.singletonList(userRepository.findUserByPhone(phone));
         }
-        if(id != null){
+        if(id != null ){
             users = Collections.singletonList(userRepository.findUserById(id));
         }
         model.addAttribute("users",users);
         return "searchUser";
+    }
+    @PostMapping("/searchAbo")
+    public String searchAboPost(@RequestParam String surname, @RequestParam String email, @RequestParam String phone, @RequestParam Long id, Model model){
+        List<User> users = null;
+        if(surname.length() !=0){
+            users = userRepository.findUsersBySurname(surname);
+        }
+        if(email.length()!=0){
+            users = Collections.singletonList(userRepository.findUserByEmail(email));
+        }
+        if(phone.length()!=0){
+            users = Collections.singletonList(userRepository.findUserByPhone(phone));
+        }
+        if(id != null ){
+            users = Collections.singletonList(userRepository.findUserById(id));
+        }
+        model.addAttribute("users",users);
+        return "searchAbo";
     }
 
 
