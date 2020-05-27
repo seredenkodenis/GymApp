@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>GYM</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y="
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" th:href="@{../css/profile.css}"/>
+</head>
+<body>
+
+<div th:replace="fragments/header"></div>
+
+<div class="container" style="margin-top: 103px; margin-bottom: 70px; width: 90%;background-color: white;">
+    <div class="row">
+        <div class="col-sm-3">
+            <img th:if="${image}" class="profile-photo" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="">
+            <img th:if="${image2}" th:src="@{/profile/getImage}" class="profile-photo" alt="">
+        </div>
+        <div class="col-sm">
+            <h2 class="name"><span th:text="${surname}"></span> <span style="margin-left: 10px;" th:text="${name}"></span></h2>
+            <p class="descrip">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            <h3 class="birthday">День рождение: <span style="margin-left: 10px;" th:text="${birthday}"></span></h3>
+            <h3 class="typeAbo">Тип абонимента: <span style="margin-left: 10px;" th:text="${typeAbo}"></span></h3>
+            <h3 class="endAbo">Окончание абонимента: </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm" style="margin-bottom: 30px;">
+            <button type="button" data-toggle="modal" data-target="#exampleModal1" style="width: 253px; margin-top: 30px; color: white;" class="btn btn-warning">Изменить фотографию</button>
+            <a th:href="@{profile/trainingPlan}" ><button type="button"  style="margin-top: 30px;" class="btn btn-info">План тренировок</button></a>
+            <a th:href="@{profile/weightControl}"><button type="button"  style="margin-top: 30px;" class="btn btn-info">Контроль веса</button></a>
+            <a th:href="@{profile/diary}"><button type="button"  style="margin-top: 30px;" class="btn btn-info">Дневник</button></a>
+            <a th:href="@{profile/connectAdministration}"><button type="button"  style="margin-top: 30px;" class="btn btn-info">Связь с администрацией</button></a>
+            <a th:href="@{profile/counters}"><button type="button" style="width: 130px;margin-top: 30px;" class="btn btn-info">Полезности</button></a>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Найти</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:method="post" th:action="@{/profile/uploadFiles}" encType="multipart/form-data">
+                    <input type="file" name="files" multiple required />
+                    <button type="submit" class="btn btn-primary">Загрузить</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/footer"></div>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+        integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{../js/script.js}"></script>
+</body>
+</html>

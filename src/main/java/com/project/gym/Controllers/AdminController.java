@@ -164,7 +164,7 @@ public class AdminController {
     public String refreshGet(Model model){
         List<User> users = userRepository.findAll();
         model.addAttribute("users",users);
-        return "refresh";
+            return "refresh";
     }
 
     @PostMapping("/refresh/edit")
