@@ -1,7 +1,9 @@
 package com.project.gym.Controllers;
 
+import com.project.gym.Model.Plan;
 import com.project.gym.Model.User;
 import com.project.gym.Repos.UserRepository;
+import com.project.gym.Services.PlanService;
 import com.project.gym.Services.StoreFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -10,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
@@ -21,6 +20,10 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
+
+    @Autowired
+    private PlanService planService;
+
     @GetMapping("")
     public String profileMain(Principal principal, Model model){
         User user = userRepository.findUserByEmail(principal.getName());
@@ -60,7 +63,77 @@ public class ProfileController {
     }
 
     @GetMapping("/trainingPlan")
-    public String planGet(){
+    public String planGet(Principal principal, Model model){
+        User user = userRepository.findUserByEmail(principal.getName());
+        Plan plan = user.getPlan();
+        model.addAttribute("mon",plan.getMon());
+        model.addAttribute("tue",plan.getTue());
+        model.addAttribute("wen",plan.getWen());
+        model.addAttribute("thu",plan.getThu());
+        model.addAttribute("fri",plan.getFri());
+        model.addAttribute("sat",plan.getSat());
+        model.addAttribute("sun",plan.getSun());
         return "trainingPlan";
     }
+
+    @PostMapping("/changePlan/{day}")
+    public String planPost(@PathVariable("day")String day,@RequestParam String text,Principal principal){
+        User user = userRepository.findUserByEmail(principal.getName());
+        Plan plan = user.getPlan();
+        if(day.equals("mon")){
+            plan.setMon(text);
+        }
+        if(day.equals("tue")){
+            plan.setTue(text);
+        }
+        if(day.equals("wen")){
+            plan.setWen(text);
+        }
+        if(day.equals("thu")){
+            plan.setThu(text);
+        }
+        if(day.equals("fri")){
+            plan.setFri(text);
+        }
+        if(day.equals("sat")){
+            plan.setSat(text);
+        }
+        if(day.equals("sun")){
+            plan.setSun(text);
+        }
+        planService.addPlan(user,plan);
+        userRepository.save(user);
+        return "redirect:/profile/trainingPlan";
+    }
+
+    @GetMapping("/restDay/{day}")
+    public String restDay(@PathVariable("day")String day,Principal principal){
+        User user = userRepository.findUserByEmail(principal.getName());
+        Plan plan = user.getPlan();
+        if(day.equals("mon")){
+            plan.setMon("Отдохни");
+        }
+        if(day.equals("tue")){
+            plan.setTue("Отдохни");
+        }
+        if(day.equals("wen")){
+            plan.setWen("Отдохни");
+        }
+        if(day.equals("thu")){
+            plan.setThu("Отдохни");
+        }
+        if(day.equals("fri")){
+            plan.setFri("Отдохни");
+        }
+        if(day.equals("sat")){
+            plan.setSat("Отдохни");
+        }
+        if(day.equals("sun")){
+            plan.setSun("Отдохни");
+        }
+        planService.addPlan(user,plan);
+        userRepository.save(user);
+        return "redirect:/profile/trainingPlan";
+    }
+
 }

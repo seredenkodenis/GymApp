@@ -1,5 +1,6 @@
 package com.project.gym.Services;
 
+import com.project.gym.Model.Plan;
 import com.project.gym.Model.Role;
 import com.project.gym.Model.User;
 import com.project.gym.Repos.UserRepository;
@@ -16,6 +17,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PlanService planService;
+
     public void createUser(User user) {
         BCryptPasswordEncoder  encoder = new  BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -23,7 +27,9 @@ public class UserService {
         List<Role> roles = new ArrayList<>();
         roles.add(userRole);
         user.setRoles(roles);
+        Plan plan = new Plan("Нету записи", "Нету записи", "Нету записи","Нету записи","Нету записи","Нету записи","Нету записи");
         userRepository.save(user);
+        planService.addPlan(user,plan);
     }
 
     public void createAdmin(User user) {
