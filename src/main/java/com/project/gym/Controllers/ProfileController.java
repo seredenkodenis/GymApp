@@ -58,4 +58,9 @@ public class ProfileController {
         }
         return "redirect:/profile";
     }
+
+    @GetMapping("/trainingPlan")
+    public String planGet(){
+        return "trainingPlan";
+    }
 }
