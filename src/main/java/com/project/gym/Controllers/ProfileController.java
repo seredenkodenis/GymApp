@@ -3,6 +3,7 @@ package com.project.gym.Controllers;
 import com.project.gym.Model.Plan;
 import com.project.gym.Model.User;
 import com.project.gym.Repos.UserRepository;
+import com.project.gym.Services.NotificationService;
 import com.project.gym.Services.PlanService;
 import com.project.gym.Services.StoreFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ProfileController {
 
     @Autowired
     private PlanService planService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("")
     public String profileMain(Principal principal, Model model){
@@ -134,6 +138,17 @@ public class ProfileController {
         planService.addPlan(user,plan);
         userRepository.save(user);
         return "redirect:/profile/trainingPlan";
+    }
+    @GetMapping("/connectAdministration")
+    public String connect(){
+        return "connectAdministration";
+    }
+
+    @PostMapping("/connectAdministration")
+    public String connectPost(Principal principal,@RequestParam String text){
+        User user = userRepository.findUserByEmail(principal.getName());
+        notificationService.connectAdmin(text,user);
+        return "redirect:/profile/";
     }
 
 }

@@ -202,6 +202,27 @@ body{
     }
 }
 
+.connect1{
+    padding-top: 15px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 20px;
+    align-items: center;
+
+    color: black;
+}
+
+.connect2{
+    padding-top: 10px;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    align-items: center;
+
+    color: black;
+}
 .user-text{
     font-family: Roboto;
     font-style: normal;

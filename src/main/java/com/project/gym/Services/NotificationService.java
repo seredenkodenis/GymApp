@@ -80,4 +80,24 @@ public class NotificationService {
         }
 
     }
+    public void connectAdmin(String text, User user){
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("mail.denis-seredenko.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("admin@denis-seredenko.com");
+        mailSender.setPassword("seredenko302003");
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("admin@denis-seredenko.com");
+        mailMessage.setTo("denis-seredenko@ukr.net");
+        mailMessage.setSubject("Новое сообщение с тренажерного зала");
+        mailMessage.setText("Привет вам пришло новое сообщение от пользователя с id: " + user.getId() +"\n\n"+ text +"\n\n С уважением,\n gym-online.");
+        mailSender.send(mailMessage);
+    }
 }
