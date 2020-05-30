@@ -216,7 +216,9 @@ body{
     color: #000000;
 }
 
-
+.tox-tinymce-aux{
+    display: none;
+}
 
 .footer{
     height: 150px;
