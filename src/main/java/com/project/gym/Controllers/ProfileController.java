@@ -2,10 +2,12 @@ package com.project.gym.Controllers;
 
 import com.project.gym.Model.Plan;
 import com.project.gym.Model.User;
+import com.project.gym.Model.Weight;
 import com.project.gym.Repos.UserRepository;
 import com.project.gym.Services.NotificationService;
 import com.project.gym.Services.PlanService;
 import com.project.gym.Services.StoreFile;
+import com.project.gym.Services.WeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
@@ -27,6 +31,9 @@ public class ProfileController {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private WeightService weightService;
 
     @GetMapping("")
     public String profileMain(Principal principal, Model model){
@@ -151,4 +158,20 @@ public class ProfileController {
         return "redirect:/profile/";
     }
 
+    @GetMapping("/weightControl")
+    public String weightControl(Principal principal, Model model){
+        User user = userRepository.findUserByEmail(principal.getName());
+        List<Weight> weightList = user.getWeights();
+        model.addAttribute("weights", weightList);
+        return "weightControl";
+    }
+    @PostMapping("/weightControl")
+    public String weightControlPost(@RequestParam String description, @RequestParam Float weight, Principal principal){
+        User user = userRepository.findUserByEmail(principal.getName());
+        Date date = new Date();
+        Weight weight1 = new Weight(date,weight,description);
+        weightService.addWeight(user,weight1);
+        userRepository.save(user);
+        return "redirect:/profile/weightControl";
+    }
 }

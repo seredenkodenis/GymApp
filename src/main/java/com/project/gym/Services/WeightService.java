@@ -19,22 +19,8 @@ public class WeightService{
     private UserRepository userRepository;
 
     public void addWeight(User user, Weight weight){
-        List<Weight> bd = user.getWeights();
-        if(bd.size() == 0){
-            List<Weight> weights = new ArrayList<>();
-            weight.setUser(user);
-            weightRepository.save(weight);
-            weights.add(weight);
-            user.setWeights(weights);
-            userRepository.save(user);
-        }else{
-            List<Weight> weights = user.getWeights();
-            weight.setUser(user);
-            weightRepository.save(weight);
-            weights.add(weight);
-            user.setWeights(weights);
-            userRepository.save(user);
-        }
+        weight.setUser(user);
+        weightRepository.save(weight);
     }
 
     public List<Weight> userWeights(User user){
