@@ -1,13 +1,12 @@
 package com.project.gym.Controllers;
 
 import com.project.gym.Model.Plan;
+import com.project.gym.Model.Task;
 import com.project.gym.Model.User;
 import com.project.gym.Model.Weight;
+import com.project.gym.Repos.TaskRepository;
 import com.project.gym.Repos.UserRepository;
-import com.project.gym.Services.NotificationService;
-import com.project.gym.Services.PlanService;
-import com.project.gym.Services.StoreFile;
-import com.project.gym.Services.WeightService;
+import com.project.gym.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +33,12 @@ public class ProfileController {
 
     @Autowired
     private WeightService weightService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     @GetMapping("")
     public String profileMain(Principal principal, Model model){
@@ -173,5 +178,32 @@ public class ProfileController {
         weightService.addWeight(user,weight1);
         userRepository.save(user);
         return "redirect:/profile/weightControl";
+    }
+
+    @PostMapping("/addTask")
+    public String addTaskPost(@RequestParam String text, Principal principal){
+        User user = userRepository.findUserByEmail(principal.getName());
+        Date date = new Date();
+        Task task = new Task(date.toString(),text);
+        taskService.addTask(task,user);
+        userRepository.save(user);
+        return "redirect:/profile/diary";
+    }
+
+    @GetMapping("/diary")
+    public String diaryGet(Principal principal, Model model){
+        User user = userRepository.findUserByEmail(principal.getName());
+        List<Task> tasks = user.gettasks();
+        model.addAttribute("tasks",tasks);
+        return "diary";
+    }
+
+    @GetMapping("/deleteTask/{id}")
+    public String deleteTask(@PathVariable("id") Long id, Principal principal){
+        User user = userRepository.findUserByEmail(principal.getName());
+        Task task = taskRepository.findTaskById(id);
+        taskRepository.delete(task);
+        userRepository.save(user);
+        return "redirect:/profile/diary";
     }
 }

@@ -8,16 +8,15 @@ public class Task {
     @GeneratedValue
     private Long id;
 
-    @NotEmpty
+
     private String date;
 
-    @NotEmpty
+
     private String startTime;
 
-    @NotEmpty
     private String stopTime;
 
-    @NotEmpty
+
     @Column(length=1000)
     private String description;
 
@@ -67,6 +66,10 @@ public class Task {
         this.stopTime = stopTime;
         this.description = description;
         this.user = user;
+    }
+    public Task(String date,String description) {
+        this.date = date;
+        this.description = description;
     }
     public Task(String date, String startTime, String stopTime, String description) {
         this.date = date;
