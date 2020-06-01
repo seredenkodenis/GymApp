@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,10 @@ public class User {
     @Basic
     @Temporal(TemporalType.DATE)
     private Date birthday;
+
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Calendar dateAboniment;
 
     @Lob
     @Type(type = "org.hibernate.type.BinaryType")
@@ -117,6 +122,22 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Calendar getDateAboniment() {
+        return dateAboniment;
+    }
+
+    public void setDateAboniment(Calendar dateAboniment) {
+        this.dateAboniment = dateAboniment;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public User(String email, String name, String password) {

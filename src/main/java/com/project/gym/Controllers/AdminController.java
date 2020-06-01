@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +52,14 @@ public class AdminController {
     @PostMapping("/addAboniment")
     public String addAbonimentPost(@RequestParam Long id, @RequestParam String type){
         User user = userService.findOneId(id);
+        Calendar current = user.getDateAboniment();
+        if(current == null){
+            current = Calendar.getInstance();
+        }
+        if(type.equals("month")){
+            current.add(Calendar.MONTH , 1);
+            user.setDateAboniment(current);
+        }
         user.setAboniment(type);
         userRepository.save(user);
         return "news";

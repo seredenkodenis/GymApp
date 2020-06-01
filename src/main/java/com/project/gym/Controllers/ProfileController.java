@@ -206,4 +206,9 @@ public class ProfileController {
         userRepository.save(user);
         return "redirect:/profile/diary";
     }
+
+    @GetMapping("/paymentSuccess")
+    public String keke(){
+        return "Your payment was succesfull";
+    }
 }

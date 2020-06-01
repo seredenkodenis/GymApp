@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select user_email as principal, role_name as role from user_roles where user_email=?")
                 .passwordEncoder(passwordEncoder()).rolePrefix("ROLE_");
 
+
     }
 
     @Bean
@@ -34,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        http.cors().and().csrf().disable();
         http.authorizeRequests().antMatchers("/register", "/", "/about", "/login", "/static/css/**", "/webjars/**","/news/**").permitAll()
                 .antMatchers("/profile").hasAnyRole("USER,ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
