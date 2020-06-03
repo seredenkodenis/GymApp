@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -50,10 +52,14 @@ public class ProfileController {
             model.addAttribute("image", false);
             model.addAttribute("image2", true);
         }
+        Calendar user_end_aboniment = user.getDateAboniment();
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy ");
+        String formatted = format1.format(user_end_aboniment.getTime());
         model.addAttribute("name",user.getName());
         model.addAttribute("birthday",user.getBirthday());
         model.addAttribute("typeAbo",user.getAboniment());
         model.addAttribute("surname", user.getSurname());
+        model.addAttribute("endAbo",formatted);
         return "profileMain";
     }
     @GetMapping("/getImage")

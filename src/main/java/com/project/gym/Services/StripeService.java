@@ -45,7 +45,7 @@ public class StripeService {
     @Autowired
     private UserService userService;
 
-    public void addUser(String email){
+    public void addUserMonth(String email){
         // You may want to store charge id along with order information
         User user = userService.findOne(email);
         Calendar current = user.getDateAboniment();
@@ -53,6 +53,18 @@ public class StripeService {
             current = Calendar.getInstance();
         }
         current.add(Calendar.MONTH , 1);
+        user.setDateAboniment(current);
+        userRepository.save(user);
+    }
+
+    public void addUserYear(String email){
+        // You may want to store charge id along with order information
+        User user = userService.findOne(email);
+        Calendar current = user.getDateAboniment();
+        if(current == null){
+            current = Calendar.getInstance();
+        }
+        current.add(Calendar.MONTH , 12);
         user.setDateAboniment(current);
         userRepository.save(user);
     }

@@ -28,7 +28,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5>Month aboniment</h5>
-                        <p class="lead">USD 9.99</p>
+                        <p class="lead">USD 100.00</p>
                     </div>
                 </div>
                 <form action="#" id="payment-form" method="post">
@@ -113,7 +113,7 @@
                     var token = result.token.id;
                     var email = $('#email').val();
                     $.post(
-                        "/profile/payment/create-charge-month",
+                        "/profile/payment/create-charge-year",
                         {email: email, token: token},
                         function (data) {
                             window.location.replace("http://www.w3schools.com");

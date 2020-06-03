@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/profile/")
+@RequestMapping("/profile/payment")
 public class PaymentController {
 
 
@@ -33,14 +33,18 @@ public class PaymentController {
         this.stripeService = stripeService;
     }
 
+    @GetMapping("")
+    public String chooseType(){
+        return "chooseCharge";
+    }
 
-    @GetMapping("/charge")
+    @GetMapping("/chargeMonth")
     public String chargePage(Model model) {
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
         return "charge";
     }
 
-    @PostMapping("/create-charge")
+    @PostMapping("/create-charge-month")
     public @ResponseBody
     Response createCharge(String email, String token) {
         //validate data
@@ -53,8 +57,33 @@ public class PaymentController {
         if (chargeId == null) {
             return new Response(false, "An error occurred while trying to create a charge.");
         }
-        stripeService.addUser(email);
+        stripeService.addUserMonth(email);
 
         return new Response(true, "Success! Your charge id is " + chargeId);
     }
+
+    @GetMapping("/chargeYear")
+    public String chargePageYear(Model model) {
+        model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
+        return "chargeYear";
+    }
+
+    @PostMapping("/create-charge-year")
+    public @ResponseBody
+    Response createChargeYear(String email, String token) {
+        //validate data
+        if (token == null) {
+            return new Response(false, "Stripe payment token is missing. Please, try again later.");
+        }
+
+        //create charge
+        String chargeId = stripeService.createCharge(email, token, 10000); //$100.00 USD
+        if (chargeId == null) {
+            return new Response(false, "An error occurred while trying to create a charge.");
+        }
+        stripeService.addUserYear(email);
+
+        return new Response(true, "Success! Your charge id is " + chargeId);
+    }
+
 }
