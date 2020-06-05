@@ -20,14 +20,14 @@
         <div class="row">
             <div class="col-lg-6 col-md-8 col-12 my-auto mx-auto">
                 <h1>
-                    Stripe One-Time Charge
+                    Купить абонимент на год
                 </h1>
                 <p class="lead mb-4">
-                    Please fill the form below to complete the order payment
+                    Пожалуйста заполните форму ниже для оплаті
                 </p>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5>Month aboniment</h5>
+                        <h5>Годовой абонимент</h5>
                         <p class="lead">USD 100.00</p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <input id="api-key" type="hidden" th:value="${stripePublicKey}">
                     <div class="form-group">
                         <label class="font-weight-medium" for="card-element">
-                            Enter credit or debit card below
+                            Введите номер карточки
                         </label>
                         <div class="w-100" id="card-element">
                             <!-- A Stripe Element will be inserted here. -->
@@ -49,7 +49,7 @@
                     <div class="text-danger w-100" id="card-errors" role="alert"></div>
                     <div class="form-group pt-2">
                         <button class="btn btn-primary btn-block" id="submitButton" type="submit">
-                            Pay With Your Card
+                            Оплатить картой
                         </button>
                         <div class="small text-muted mt-2">
                             Pay securely with Stripe. By clicking the button above, you agree

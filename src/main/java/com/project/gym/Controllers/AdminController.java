@@ -75,6 +75,16 @@ public class AdminController {
     public String addUserPost(@RequestParam String surname, @RequestParam String name,@RequestParam String aboniment, @RequestParam String phone, @RequestParam String email, @RequestParam String address, @RequestParam String password, @RequestParam String birthday, @RequestParam Long id){
         User user = new User();
         user.setName(name); user.setEmail(email); user.setId(id); user.setAboniment(aboniment); user.setSurname(surname); user.setPassword(password); user.setPhone(phone); user.setAddress(address);
+        if(aboniment.equals("month")){
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH,1);
+            user.setDateAboniment(calendar);
+        }
+        if(aboniment.equals("year")){
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, 1);
+            user.setDateAboniment(calendar);
+        }
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse(birthday);
             user.setBirthday(date);
@@ -187,8 +197,25 @@ public class AdminController {
             user.setSurname(surname);
         if(phone.length()!= 0)
             user.setPhone(phone);
-        if(aboniment.length() != 0)
+        if(aboniment.length() != 0) {
+            if(aboniment.equals("none")){
+                user.setAboniment(aboniment);
+                user.setDateAboniment(null);
+            }
+            if(aboniment.equals("month") || aboniment.equals("monthAndTrainer")){
+                user.setAboniment(aboniment);
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.MONTH,1);
+                user.setDateAboniment(calendar);
+            }
+            if(aboniment.equals("year")){
+                user.setAboniment(aboniment);
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.YEAR,1);
+                user.setDateAboniment(calendar);
+            }
             user.setAboniment(aboniment);
+        }
         if(newNumber != null)
             user.setId(newNumber);
         userRepository.save(user);
