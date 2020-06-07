@@ -56,8 +56,19 @@ public class AdminController {
         if(current == null){
             current = Calendar.getInstance();
         }
+        if(type.equals("none")){
+            return "redirect:/admin/main";
+        }
         if(type.equals("month")){
             current.add(Calendar.MONTH , 1);
+            user.setDateAboniment(current);
+        }
+        if(type.equals("monthAndTrainer")){
+            current.add(Calendar.MONTH , 1);
+            user.setDateAboniment(current);
+        }
+        if(type.equals("year")){
+            current.add(Calendar.YEAR , 1);
             user.setDateAboniment(current);
         }
         user.setAboniment(type);
@@ -76,6 +87,11 @@ public class AdminController {
         User user = new User();
         user.setName(name); user.setEmail(email); user.setId(id); user.setAboniment(aboniment); user.setSurname(surname); user.setPassword(password); user.setPhone(phone); user.setAddress(address);
         if(aboniment.equals("month")){
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH,1);
+            user.setDateAboniment(calendar);
+        }
+        if(aboniment.equals("monthAndTrainer")){
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MONTH,1);
             user.setDateAboniment(calendar);
@@ -112,6 +128,7 @@ public class AdminController {
         if(surname!=null && user==null)
             user = userService.findOneSurname(surname);
         user.setAboniment(null);
+        user.setDateAboniment(null);
         userRepository.save(user);
         return "redirect:/admin/main";
     }
@@ -198,9 +215,9 @@ public class AdminController {
         if(phone.length()!= 0)
             user.setPhone(phone);
         if(aboniment.length() != 0) {
-            if(aboniment.equals("none")){
-                user.setAboniment(aboniment);
-                user.setDateAboniment(null);
+            if(aboniment.equals("delete")){
+               user.setAboniment("deleted");
+               user.setDateAboniment(null);
             }
             if(aboniment.equals("month") || aboniment.equals("monthAndTrainer")){
                 user.setAboniment(aboniment);
@@ -214,7 +231,6 @@ public class AdminController {
                 calendar.add(Calendar.YEAR,1);
                 user.setDateAboniment(calendar);
             }
-            user.setAboniment(aboniment);
         }
         if(newNumber != null)
             user.setId(newNumber);

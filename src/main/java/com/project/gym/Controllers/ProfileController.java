@@ -217,4 +217,9 @@ public class ProfileController {
     public String keke(){
         return "Your payment was succesfull";
     }
+
+    @GetMapping("/counters")
+    public String counters(){
+        return "counters";
+    }
 }
