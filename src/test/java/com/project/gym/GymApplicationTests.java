@@ -22,7 +22,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 @SpringBootTest
 class GymApplicationTests {
 
-    @Test
+    /*@Test
     void contextLoads() {
     }
     @Autowired
@@ -121,6 +121,6 @@ class GymApplicationTests {
         }else{
             System.out.println(weights.get(0).getWeight());
         }
-    }
+    }*/
 
 }
