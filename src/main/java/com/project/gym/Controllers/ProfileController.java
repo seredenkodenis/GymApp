@@ -54,12 +54,12 @@ public class ProfileController {
         }
         Calendar user_end_aboniment = user.getDateAboniment();
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy ");
-        String formatted = format1.format(user_end_aboniment.getTime());
+//        String formatted = format1.format(user_end_aboniment.getTime());
         model.addAttribute("name",user.getName());
         model.addAttribute("birthday",user.getBirthday());
         model.addAttribute("typeAbo",user.getAboniment());
         model.addAttribute("surname", user.getSurname());
-        model.addAttribute("endAbo",formatted);
+       // model.addAttribute("endAbo",formatted);
         return "profileMain";
     }
     @GetMapping("/getImage")

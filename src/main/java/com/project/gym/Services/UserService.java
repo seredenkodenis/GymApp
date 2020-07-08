@@ -1,8 +1,6 @@
 package com.project.gym.Services;
 
-import com.project.gym.Model.Plan;
-import com.project.gym.Model.Role;
-import com.project.gym.Model.User;
+import com.project.gym.Model.*;
 import com.project.gym.Repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +25,10 @@ public class UserService {
         List<Role> roles = new ArrayList<>();
         roles.add(userRole);
         user.setRoles(roles);
+        List<Task> tasks = new ArrayList<>();
+        user.setTasks(tasks);
+        List<Weight> weights = new ArrayList<>();
+        user.setWeights(weights);
         Plan plan = new Plan("Нету записи", "Нету записи", "Нету записи","Нету записи","Нету записи","Нету записи","Нету записи");
         userRepository.save(user);
         planService.addPlan(user,plan);

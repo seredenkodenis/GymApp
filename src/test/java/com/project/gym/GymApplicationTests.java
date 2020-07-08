@@ -22,7 +22,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 @SpringBootTest
 class GymApplicationTests {
 
-    /*@Test
+    @Test
     void contextLoads() {
     }
     @Autowired
@@ -43,15 +43,11 @@ class GymApplicationTests {
             userService.createUser(newUser);
         }
         {
-            User newUser = new User("user2@mail.com", "User2", "123456");
-            userService.createUser(newUser);
-        }
-        {
             User newUser = new User("admin@mail.com", "admin1", "123456");
             userService.createAdmin(newUser);
         }
 
-        Task userTask = new Task("03/01/2018", "00:11", "11:00", "1");
+        Task userTask = new Task("03/01/2018", "00:11", "11:00", "first tas");
 
         Task userTask2 = new Task("11/11/2011", "04:11", "17:00", "second task");
         Task userTask3 = new Task("00/00/2000", "00:00", "00:00", "000000000000000000");
@@ -76,7 +72,7 @@ class GymApplicationTests {
     }
 
     @Test
-    public void temp(){
+    public void setId(){
         User newUser = new User("user10@mail.com", "user4", "123456");
         newUser.setId((long) 1);
         userService.createUser(newUser);
@@ -87,7 +83,9 @@ class GymApplicationTests {
         User user = userRepository.findUserByEmail("user1@mail.com");
         List<Task> task = taskService.findUserTask(user);
         System.out.println("user1 data ------------------------");
-        System.out.println(task.size());
+        for (int i = 0; i < task.size(); ++i){
+            System.out.println(task.get(i).getDate() + " | " + task.get(i).getDescription()+" | " + task.get(i).getStartTime());
+        }
     }
 
     @Test
@@ -101,7 +99,7 @@ class GymApplicationTests {
     public void getTestPlan(){
         User user = userService.findOne("admin@mail.com");
         Plan plan = user.getPlan();
-        System.out.println(plan.getMon());
+        assertNotNull(plan.getMon());
     }
 
     @Test
@@ -117,10 +115,10 @@ class GymApplicationTests {
         User user = userService.findOne("user1@mail.com");
         List<Weight> weights = weightService.userWeights(user);
         if(weights.size() == 0){
-            System.out.println("SORRE BRO ONLY 0");
+            System.out.println("SORRY BRO ONLY 0");
         }else{
             System.out.println(weights.get(0).getWeight());
         }
-    }*/
+    }
 
 }

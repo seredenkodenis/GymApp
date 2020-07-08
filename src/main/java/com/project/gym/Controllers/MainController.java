@@ -40,7 +40,7 @@ public class MainController {
         user.setName(name);
         user.setPhone(phone);
         userService.createUser(user);
-        return "profile";
+        return "profileMain";
     }
 
     @GetMapping("/login")
